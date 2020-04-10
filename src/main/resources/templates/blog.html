@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
-  <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/type.scc}" >
-  <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.scc}" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/typo.css">
+  <link rel="stylesheet" href="../static/css/animate.css">
   <link rel="stylesheet" href="../static/lib/prism/prism.css">
   <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
-  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.scc}" >
-
+  <link rel="stylesheet" href="../static/css/me.css">
 </head>
+
 <body>
 <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
@@ -42,11 +42,11 @@
     <div class="ui top attached segment">
       <div class="ui horizontal link list">
         <div class="item">
-          <img src="../static/images/icon.png" alt="" class="ui avatar image">
+          <img src="../static/images/icon.png" th:src="@{/images/icon.png}" alt="" class="ui avatar image">
         </div>
         <div class="item">
           <div class="content">
-            <a href="#" class="header" th:text="${blog.user.nickname}">汪峰</a>
+            <a href="#" class="header" >汪峰</a>
           </div>
         </div>
         <div class="item">
@@ -64,7 +64,7 @@
     <!-- blog content  -->
     <div class="ui attached padded segment">
       <div class="ui right aligned basic segment">
-        <div class="ui orange basic label" th:text="${blog.flag}">Original</div>
+        <div class="ui orange basic label" >Original</div>
       </div>
       <br>
       <h2 class="ui center aligned header">关于刻意练习的清单</h2>
@@ -160,9 +160,9 @@
 
         <p>目前已有像百姓网等全面使用 <i class="serif">Typo.css</i> 的项目，测试平台的覆盖，特别是在<abbr title="手机、平板电脑等移动平台">移动端</abbr>上还没有覆盖完主流平台，希望有能力的同学能加入测试行列，或者加入到 <i class="serif">Typo.css</i>
           的开发。加入方法：<a href="https://github.com/sofish/Typo.css">参与 <i class="serif">Typo.css</i> 开发</a>。如有批评、建议和意见，也随时欢迎给在 Github 直接提 <a
-              href="https://github.com/sofish/Typo.css/issues">issues</a>，或给<abbr title="Sofish Lin, author of Typo.css"
-                                                                                  role="author">我</abbr>发<a
-              href="mailto:sofish@icloud.com">邮件</a>。</p>
+                  href="https://github.com/sofish/Typo.css/issues">issues</a>，或给<abbr title="Sofish Lin, author of Typo.css"
+                                                                                      role="author">我</abbr>发<a
+                  href="mailto:sofish@icloud.com">邮件</a>。</p>
 
 
         <h2 id="section2">二、排版实例：</h2>
@@ -195,7 +195,7 @@
         <h4>评析</h4>
 
         <p>宋代著名学者<u class="typo-u">朱熹</u>对此章评价极高，说它是「入道之门，积德之基」。本章这三句话是人们非常熟悉的。历来的解释都是：学了以后，又时常温习和练习，不也高兴吗等等。三句话，一句一个意思，前后句子也没有什么连贯性。但也有人认为这样解释不符合原义，指出这里的「学」不是指学习，而是指学说或主张；「时」不能解为时常，而是时代或社会的意思，「习」不是温习，而是使用，引申为采用。而且，这三句话不是孤立的，而是前后相互连贯的。这三句的意思是：自己的学说，要是被社会采用了，那就太高兴了；退一步说，要是没有被社会所采用，可是很多朋友赞同<abbr
-            title="张燕婴">我</abbr>的学说，纷纷到我这里来讨论问题，我也感到快乐；再退一步说，即使社会不采用，人们也不理解我，我也不怨恨，这样做，不也就是君子吗？（见《齐鲁学刊》1986年第6期文）这种解释可以自圆其说，而且也有一定的道理，供读者在理解本章内容时参考。
+                title="张燕婴">我</abbr>的学说，纷纷到我这里来讨论问题，我也感到快乐；再退一步说，即使社会不采用，人们也不理解我，我也不怨恨，这样做，不也就是君子吗？（见《齐鲁学刊》1986年第6期文）这种解释可以自圆其说，而且也有一定的道理，供读者在理解本章内容时参考。
         </p>
 
         <p>此外，在对「人不知，而不愠」一句的解释中，也有人认为，「人不知」的后面没有宾语，人家不知道什么呢？当时因为孔子有说话的特定环境，他不需要说出知道什么，别人就可以理解了，却给后人留下一个谜。有人说，这一句是接上一句说的，从远方来的朋友向我求教，我告诉他，他还不懂，我却不怨恨。这样，「人不知」就是「人家不知道我所讲述的」了。这样的解释似乎有些牵强。</p>
@@ -438,6 +438,7 @@ h5,h6{font-size:1em;}
       </div>
 
       <!-- Donate -->
+<!--      TODO: Cannot load the images when clicked-->
       <div class="ui center aligned basic segment">
         <button id="payButton" class="ui orange basic circular button">要恰饭的嘛</button>
       </div>
@@ -445,15 +446,15 @@ h5,h6{font-size:1em;}
         <div class="ui orange basic label">
           <div class="ui images" style="font-size: inherit !important;">
             <div class="image">
-              <img src="../static/images/amazon.png" alt="" class="ui rounded bordered image" style="width: 120px">
+              <img src="../static/images/amazon.png" th:src="@{/images/amazon.png}" alt="" class="ui rounded bordered image" style="width: 120px">
               <div>Amazon</div>
             </div>
             <div class="image">
-              <img src="../static/images/google.png" alt="" class="ui rounded bordered image" style="width: 120px">
+              <img src="../static/images/google.png" th:src="@{/images/google.png}" alt="" class="ui rounded bordered image" style="width: 120px">
               <div>Google</div>
             </div>
             <div class="image">
-              <img src="../static/images/wechat.png" alt="" class="ui rounded bordered image" style="width: 120px">
+              <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt="" class="ui rounded bordered image" style="width: 120px">
               <div>Wechat</div>
             </div>
           </div>
@@ -473,7 +474,7 @@ h5,h6{font-size:1em;}
           </ui>
         </div>
         <div class="five wide column">
-          <img src="../static/images/icon.png" alt="" class="ui right floated rounded bordered image" style="width: 110px;">
+          <img src="../static/images/icon.png" th:src="@{/images/icon.png}" alt="" class="ui right floated rounded bordered image" style="width: 110px;">
         </div>
       </div>
     </div>
@@ -484,7 +485,7 @@ h5,h6{font-size:1em;}
           <h3 class="ui dividing header">Comments</h3>
           <div class="comment">
             <a class="avatar">
-              <img src="../static/images/icon.png">
+              <img src="../static/images/icon.png" th:src="@{/images/icon.png}">
             </a>
             <div class="content">
               <a class="author">Matt</a>
@@ -501,7 +502,7 @@ h5,h6{font-size:1em;}
           </div>
           <div class="comment">
             <a class="avatar">
-              <img src="../static/images/icon.png">
+              <img src="../static/images/icon.png" th:src="@{/images/icon.png}">
             </a>
             <div class="content">
               <a class="author">Elliot Fu</a>
@@ -518,7 +519,7 @@ h5,h6{font-size:1em;}
             <div class="comments">
               <div class="comment">
                 <a class="avatar">
-                  <img src="../static/images/icon.png">
+                  <img src="../static/images/icon.png" th:src="@{/images/icon.png}">
                 </a>
                 <div class="content">
                   <a class="author">Jenny Hess</a>
@@ -537,7 +538,7 @@ h5,h6{font-size:1em;}
           </div>
           <div class="comment">
             <a class="avatar">
-              <img src="../static/images/icon.png">
+              <img src="../static/images/icon.png" th:src="@{/images/icon.png}">
             </a>
             <div class="content">
               <a class="author">Joe Henderson</a>
@@ -580,6 +581,7 @@ h5,h6{font-size:1em;}
   </div>
 </div>
 
+<!--      TODO: Toolbar does not appear -->
 <div id="toolbar" class="m-padded m-fixed m-right-bottom" style="display: none">
   <div class="ui vertical icon buttons ">
     <button type="button" class="ui toc icon button"><i class="list icon"></i></button>
@@ -598,7 +600,7 @@ h5,h6{font-size:1em;}
 </div>
 
 <div id="qrcode" class="ui wechat-qr flowing popup transition hidden" style="width: 110px">
-<!--  <img src="./static/images/wechat.png" alt="" class="ui rounded image" style="width: 110px">-->
+  <!--  <img src="./static/images/wechat.png" alt="" class="ui rounded image" style="width: 110px">-->
 </div>
 
 <br>
@@ -646,79 +648,82 @@ h5,h6{font-size:1em;}
     <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © </p>
   </div>
 </footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
 
 <script src="../static/lib/prism/prism.js"></script>
 <script src="../static/lib/tocbot/tocbot.min.js"></script>
 <script src="../static/lib/qrcode/qrcode.min.js"></script>
-<script src="../static/lib/waypoint/jquery.waypoints.js"></script>
-<script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+<script src="../static/lib/waypoints/jquery.waypoints.min.js"></script>
+<!--/*/</th:block>/*/-->
 
-<script>
-    $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-    });
+<script th:inline="javascript">
+  $('.menu.toggle').click(function () {
+    $('.m-item').toggleClass('m-mobile-hide');
+  });
 
-    $('#payButton').popup({
-        popup : $('.payQR.popup'),
-        on : 'click',
-        position: 'bottom center'
-    });
+  $('#payButton').popup({
+    popup : $('.payQR.popup'),
+    on : 'click',
+    position: 'bottom center'
+  });
 
-    tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.js-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.js-toc-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-    });
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.js-toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.js-toc-content',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3',
+  });
 
-    $('.toc.button').popup({
-        popup : $('.toc-container.popup'),
-        on : 'click',
-        position: 'left center'
-    });
+  $('.toc.button').popup({
+    popup : $('.toc-container.popup'),
+    on : 'click',
+    position: 'left center'
+  });
 
-    $('.github').popup({
-        on : 'click',
-        position: 'left center'
-    });
+  $('.github').popup({
+    on : 'click',
+    position: 'left center'
+  });
 
-    $('.wechat').popup({
-        popup : $('.wechat-qr.popup'),
-        on : 'click',
-        position: 'left center'
-    });
+  $('.wechat').popup({
+    popup : $('.wechat-qr.popup'),
+    on : 'click',
+    position: 'left center'
+  });
 
-    var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
-    var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
-    var qrcode = new QRCode("qrcode", {
-        // text: serurl+url,
-        text: "https://github.com/adanthony53",
-        width: 100,
-        height: 100,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
+  var serurl = /*[[#{blog.serurl}]]*/"127.0.0.1:8080";
+  var url = /*[[@{/blog/{id}(id=${blog.id})}]]*/"";
+  var qrcode = new QRCode("qrcode", {
+    // text: serurl+url,
+    text: "https://github.com/adanthony53",
+    width: 100,
+    height: 100,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
 
-    $('#toTop-button').click(function () {
-        $(window).scrollTo(0,500);
-    });
+  $('#toTop-button').click(function () {
+    $(window).scrollTo(0,500);
+  });
 
-    var waypoint = new Waypoint({
-        element: document.getElementById('waypoint'),
-        handler: function(direction) {
-            if (direction == 'down') {
-                $('#toolbar').show(200);
-            } else {
-                $('#toolbar').hide(500);
-            }
-            console.log('Scrolled to waypoint!  ' + direction);
-        }
-    })
+  var waypoint = new Waypoint({
+    element: document.getElementById('waypoint'),
+    handler: function(direction) {
+      if (direction == 'down') {
+        $('#toolbar').show(200);
+      } else {
+        $('#toolbar').hide(500);
+      }
+      console.log('Scrolled to waypoint!  ' + direction);
+    }
+  })
 </script>
 </body>
 </html>

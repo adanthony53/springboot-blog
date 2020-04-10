@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
-  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.scc}" >
-
+  <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
 <nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
       <h2 class="ui teal header item">Blog</h2>
-      <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>Home</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>Home</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>Types</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>Archive</a>
@@ -44,7 +43,7 @@
               <h3 class="ui teal header">Blog</h3>
             </div>
             <div class="right aligned column">
-              Total: <h2 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 14 </h2> blogs
+              Total: <h2 class="ui orange header m-inline-block m-text-thin" > 14 </h2> blogs
             </div>
           </div>
         </div>
@@ -52,10 +51,10 @@
         <!-- content -->
         <div class="ui attached segment">
           <div class="ui padded vertical segment m-padded-tb-large">
-            <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${page.content}" >
+            <div class="ui middle aligned mobile reversed stackable grid"  >
               <div class="eleven wide column">
                 <h3 class="ui header">啊这。。你真的理解什么是财富自由吗</h3>
-                <p class="m-text" th:text="|${blog.description}......|">风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
+                <p class="m-text" >风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
                 <div class="ui grid">
                   <div class="eleven wide column">
                     <div class="ui mini horizontal link list">
@@ -64,7 +63,7 @@
                       </div>
                       <div class="item">
                         <div class="content">
-                          <a href="#" class="header" th:text="${blog.user.nickname}">汪峰</a>
+                          <a href="#" class="header" >汪峰</a>
                         </div>
                       </div>
                       <div class="item">
@@ -76,7 +75,7 @@
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
+                    <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" >
                       烈马人
                     </a>
                   </div>
@@ -90,10 +89,10 @@
             </div>
           </div>
           <div class="ui padded vertical segment m-padded-tb-large">
-            <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${page.content}" >
+            <div class="ui middle aligned mobile reversed stackable grid" >
               <div class="eleven wide column">
                 <h3 class="ui header">啊这。。你真的理解什么是财富自由吗</h3>
-                <p class="m-text" th:text="|${blog.description}......|">风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
+                <p class="m-text" >风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
                 <div class="ui grid">
                   <div class="eleven wide column">
                     <div class="ui mini horizontal link list">
@@ -102,7 +101,7 @@
                       </div>
                       <div class="item">
                         <div class="content">
-                          <a href="#" class="header" th:text="${blog.user.nickname}">汪峰</a>
+                          <a href="#" class="header" >汪峰</a>
                         </div>
                       </div>
                       <div class="item">
@@ -114,7 +113,7 @@
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
+                    <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin">
                       烈马人
                     </a>
                   </div>
@@ -128,10 +127,10 @@
             </div>
           </div>
           <div class="ui padded vertical segment m-padded-tb-large">
-          <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${page.content}" >
+          <div class="ui middle aligned mobile reversed stackable grid"  >
             <div class="eleven wide column">
               <h3 class="ui header">啊这。。你真的理解什么是财富自由吗</h3>
-              <p class="m-text" th:text="|${blog.description}......|">风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
+              <p class="m-text" >风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
               <div class="ui grid">
                 <div class="eleven wide column">
                   <div class="ui mini horizontal link list">
@@ -140,7 +139,7 @@
                     </div>
                     <div class="item">
                       <div class="content">
-                        <a href="#" class="header" th:text="${blog.user.nickname}">汪峰</a>
+                        <a href="#" class="header" >汪峰</a>
                       </div>
                     </div>
                     <div class="item">
@@ -152,7 +151,7 @@
                   </div>
                 </div>
                 <div class="right aligned five wide column">
-                  <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
+                  <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin">
                     烈马人
                   </a>
                 </div>
@@ -166,10 +165,10 @@
           </div>
         </div>
           <div class="ui padded vertical segment m-padded-tb-large">
-          <div class="ui middle aligned mobile reversed stackable grid" th:each="blog : ${page.content}" >
+          <div class="ui middle aligned mobile reversed stackable grid"  >
             <div class="eleven wide column">
               <h3 class="ui header">啊这。。你真的理解什么是财富自由吗</h3>
-              <p class="m-text" th:text="|${blog.description}......|">风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
+              <p class="m-text" >风神了封神了，入魔了，魔怔了，正确做好任何一件事情的前提是清晰、正确的理解目标。而事实是，我们很多人很多时候根本没有对目标正确的定义，甚至根本从来就没有想过，只是大家都那么做而已…...</p>
               <div class="ui grid">
                 <div class="eleven wide column">
                   <div class="ui mini horizontal link list">
@@ -178,7 +177,7 @@
                     </div>
                     <div class="item">
                       <div class="content">
-                        <a href="#" class="header" th:text="${blog.user.nickname}">汪峰</a>
+                        <a href="#" class="header" >汪峰</a>
                       </div>
                     </div>
                     <div class="item">
@@ -190,7 +189,7 @@
                   </div>
                 </div>
                 <div class="right aligned five wide column">
-                  <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
+                  <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" >
                     烈马人
                   </a>
                 </div>
@@ -225,7 +224,7 @@
             <div class="ui two column grid">
               <div class="column"><i class="idea icon"></i>Types</div>
               <div class="right aligned column">
-                <a href="#" th:href="@{types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                <a href="#"  target="_blank">more <i class="angle double right icon"></i></a>
               </div>
             </div>
           </div>
@@ -266,7 +265,7 @@
             <div class="ui two column grid">
               <div class="column"><i class="tags icon"></i>Tags</div>
               <div class="right aligned column">
-                <a href="#" th:href="@{types/-1}" target="_blank">more <i class="angle double right icon"></i></a>
+                <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
               </div>
             </div>
           </div>
@@ -307,13 +306,13 @@
             <i class="bookmark icon"></i>Recommend
           </div>
           <div class="ui segment">
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin" th:text="${blog.title}">User Story</a>
+            <a href="#"  target="_blank" class="m-black m-text-thin" >User Story</a>
           </div>
           <div class="ui segment">
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin" th:text="${blog.title}">User Dog</a>
+            <a href="#"  target="_blank" class="m-black m-text-thin" >User Dog</a>
           </div>
           <div class="ui segment">
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin" th:text="${blog.title}">User Cat</a>
+            <a href="#"  target="_blank" class="m-black m-text-thin" >User Cat</a>
           </div>
         </div>
 
@@ -335,7 +334,7 @@
 
 
 <!--   footer  -->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
   <div class="ui center aligned container">
     <div class="ui inverted divided stackable grid">
       <div class="three wide column">
@@ -372,8 +371,11 @@
     <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © </p>
   </div>
 </footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {
