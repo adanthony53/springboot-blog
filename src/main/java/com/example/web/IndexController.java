@@ -17,4 +17,5 @@ public class IndexController {
     public String blog() {
         return "blog";
     }
+
 }
