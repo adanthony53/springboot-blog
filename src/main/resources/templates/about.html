@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.scc}" >
+
+</head>
+<body>
+<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui teal header item">Blog</h2>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>Home</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>Types</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>Archive</a>
+      <a href="#" class="active m-item item m-mobile-hide"><i class="mini info icon"></i>About Me</a>
+      <div class="right m-item item m-mobile-hide">
+        <div class="ui icon inverted transparent input m-margin-tb-tiny">
+          <input type="text" placeholder="Search....">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+<!--    Middle Content    -->
+<div class="m-container m-padded-tb-big">
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="eleven wide column">
+        <div class="ui segment">
+<!--          <img src="https://picsum.photos/id/1049/800/600" alt="" class="ui rounded image">-->
+          <img src="../static/images/unname2.png" alt="" class="ui rounded image">
+        </div>
+      </div>
+      <div class="five wide column">
+        <div class="ui top attached segment">
+          <div class="ui header">About Me</div>
+        </div>
+        <div class="ui attached segment">
+          <p class="m-text">开会那么严肃的时候，每个人都在被骂每个人都在接受意见的时候，我要笑吗？我是你哥哥，好吧</p>
+          <p class="m-text">“说中痛处就气急败坏，其实还是一条懒狗”，哎，好好好好好好好，你觉得是那就是，不狡辩</p>
+<!--          <p class="m-text">我和我的猫都很想你，其实我没有猫，也没有你～～</p>-->
+
+        </div>
+        <div class="ui attached segment">
+          <div class="ui orange basic left pointing label m-margin-tb-tiny">嘴臭</div>
+          <div class="ui orange basic left pointing label m-margin-tb-tiny">喷人</div>
+          <div class="ui orange basic left pointing label m-margin-tb-tiny">恰烂钱</div>
+          <div class="ui orange basic left pointing label m-margin-tb-tiny">带带大师兄</div>
+        </div>
+        <div class="ui attached segment">
+          <div class="ui teal basic left pointing label m-margin-tb-tiny">闪现</div>
+          <div class="ui teal basic left pointing label m-margin-tb-tiny">开团</div>
+          <div class="ui teal basic left pointing label m-margin-tb-tiny">盲僧</div>
+          <div class="ui teal basic left pointing label m-margin-tb-tiny">泳池派对</div>
+        </div>
+        <div class="ui bottom attached segment">
+          <a href="#" class="ui github circular icon button" data-content="adanthony53" data-position="bottom center"><i class="github icon"></i></a>
+          <a href="#" class="ui circular icon button"><i class="google icon"></i></a>
+          <a href="#" class="ui wechat circular icon button"><i class="wechat icon"></i></a>
+          <a href="#" class="ui circular icon button"><i class="amazon icon"></i></a>
+        </div>
+        <div class="ui wechat-qr flowing popup transition hidden">
+<!--          <img src="../static/images/wechat.png" alt="" class="ui rounded image" style="width: 100px">-->
+          <img src="../static/images/icon2.png" alt="" class="ui rounded image" style="width: 100px">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<!--   footer  -->
+<footer class="ui inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="three wide column">
+        <div class="ui inverted link list">
+          <div class="item">
+            <img src="../static/images/icon.png" th:src="@{/images/icon.png}" class="ui rounded image" alt="" style="width: 110px">
+          </div>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced " >Newest</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-text-thin">User Story</a>
+          <a href="#" class="item m-text-thin">User Story</a>
+          <a href="#" class="item m-text-thin">User Story</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced " >Contact</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-text-thin">Email</a>
+          <a href="#" class="item m-text-thin">LinkedIn</a>
+          <a href="#" class="item m-text-thin">Github</a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">About Me</h4>
+        <div class="ui inverted link list">
+          <p class="m-text-thin m-text-spaced m-opacity-mini">大可不必了解我，看我笑话就好...</p>
+        </div>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © </p>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.github').popup({
+        on : 'click',
+        position: 'bottom center'
+    });
+
+    $('.wechat').popup({
+        popup : $('.wechat-qr.popup'),
+        on : 'click',
+        position: 'bottom center'
+    });
+</script>
+</body>
+</html>
