@@ -38,8 +38,8 @@
 <div class="ui attached pointing menu">
   <div class="ui container">
     <div class="right menu">
-      <a href="#" class="item">Publish</a>
-      <a href="#" class="teal active item">List</a>
+      <a href="#" th:href="@{/admin/blogs/input}" class="item">Publish</a>
+      <a href="#" th:href="@{/admin/blogs}" class="teal active item">List</a>
     </div>
   </div>
 </div>
@@ -47,21 +47,26 @@
 <!--    Middle Content    -->
 <div class="m-container-small m-padded-tb-big">
   <div class="ui container">
-    <form action="#" method="post" class="ui segment form">
+    <div  class="ui secondary segment form">
+      <input type="hidden" name="page">
       <div class="inline fields">
         <div class="field">
           <input type="text" name="title" placeholder="Title">
         </div>
         <div class="field">
-          <div class="ui selection dropdown">
-            <input type="hidden" name="type">
-            <i class="dropdown icon"></i>
-            <div class="default text">Types</div>
-            <div class="menu">
-              <div class="item" data-value="1">偷了谁的奶酪</div>
-              <div class="item" data-value="1">心灵鸡汤</div>
+          <div class="ui labeled action input">
+            <div class="ui type selection dropdown">
+              <input type="hidden" name="typeId">
+              <i class="dropdown icon"></i>
+              <div class="default text">Types</div>
+              <div class="menu">
+                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">Big Data</div>
+
+              </div>
             </div>
+            <button id="clear-btn" class="ui compact button">clear</button>
           </div>
+
         </div>
         <div class="field">
           <div class="ui checkbox">
@@ -70,46 +75,50 @@
           </div>
         </div>
         <div class="field">
-          <button class="ui mini teal basic button"><i class="search icon"></i>Search</button>
+          <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>Search</button>
         </div>
       </div>
-    </form>
-    <table class="ui celled table">
-      <thead>
+    </div>
+
+    <div id="table-container">
+      <table th:fragment="blogList" class="ui compact teal table">
+        <thead>
         <tr>
           <th></th>
           <th>Title</th>
           <th>Type</th>
           <th>Recommend</th>
-          <th>Update Time</th>
+          <th>Status</th>
           <th>Operation</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Java Java Java</td>
-          <td>Java Dev</td>
-          <td>Yes</td>
-          <td>2020-04-01 04:20</td>
+        </thead>
+        <tbody>
+        <tr th:each="blog, iterStat : ${page.content}">
+          <td th:text="${iterStat.count}">1</td>
+          <td th:text="${blog.title}">猎马人</td>
+          <td th:text="${blog.type.name}">炉石传说</td>
+          <td th:text="${blog.recommend} ? 'Yes':'No'">Yes</td>
+          <td th:text="${blog.published} ? 'Published':'Draft'">Draft</td>
+          <td th:text="${blog.updateTime}">2019-10-02 09:45</td>
           <td>
-            <a href="#" class="ui mini basic teal button">Edit</a>
-            <a href="#" class="ui mini basic red button">Delete</a>
+            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">Edit</a>
+            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">Delete</a>
           </td>
         </tr>
-      </tbody>
-      <tfoot>
+        </tbody>
+        <tfoot>
         <tr>
-          <th colspan="6">
-            <div class="ui pagination menu">
-              <a href="#" class="mini item">Prev Page</a>
-              <a href="#" class="mini item">Next Page</a>
+          <th colspan="7">
+            <div class="ui mini pagination menu" th:if="${page.totalPages}>1" >
+              <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item" th:unless="${page.first}">Prev Page</a>
+              <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">Next Page</a>
             </div>
-            <a href="#" class="ui mini right floated teal basic button"> New </a>
+            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">New</a>
           </th>
         </tr>
-      </tfoot>
-    </table>
+        </tfoot>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -183,6 +192,24 @@
     });
 
     $('.ui.dropdown').dropdown();
+
+    function page(obj) {
+      $("[name='page']").val($(obj).data("page"));
+      loaddata();
+    }
+
+    $("#search-btn").click(function () {
+      loaddata();
+    });
+
+    function loaddata() {
+      $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
+        title : $("[name='title']").val(),
+        typeId : $("[name='typeId']").val(),
+        recommend : $("[name='recommend']").prop('checked'),
+        page : $("[name='page']").val()
+      });
+    }
 </script>
 </body>
 </html>
