@@ -3,6 +3,7 @@ package com.example.po;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Tag {
     @GeneratedValue
     private Long id;
 
+    @NotBlank(message = "Cannot have empty name")
     private String name;
 
     @ManyToMany(mappedBy = "tags")

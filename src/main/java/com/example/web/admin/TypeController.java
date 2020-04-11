@@ -25,7 +25,7 @@ public class TypeController {
     private TypeService typeService;
 
     @GetMapping("/types")
-    public String list(@PageableDefault(size=10, sort = {"id"}, direction = Sort.Direction.ASC)
+    public String list(@PageableDefault(size=5, sort = {"id"}, direction = Sort.Direction.ASC)
                                    Pageable pageable, Model model) {
         model.addAttribute("page", typeService.listType(pageable));
         return "admin/types";
