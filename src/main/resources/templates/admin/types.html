@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+<nav th:replace="admin/_fragments :: menu(2)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
       <h2 class="ui teal header item">Blog Management</h2>
@@ -38,8 +38,8 @@
 <div class="ui attached pointing menu">
   <div class="ui container">
     <div class="right menu">
-      <a href="#" class="item">Publish</a>
-      <a href="#" class="teal active item">List</a>
+      <a href="#" th:href="@{/admin/types/input}" class="item">Publish</a>
+      <a href="#" th:href="@{/admin/types}" class="teal active item">List</a>
     </div>
   </div>
 </div>
@@ -47,72 +47,51 @@
 <!--    Middle Content    -->
 <div class="m-container-small m-padded-tb-big">
   <div class="ui container">
-    <form action="#" method="post" class="ui segment form">
-      <div class="inline fields">
-        <div class="field">
-          <input type="text" name="title" placeholder="Title">
-        </div>
-        <div class="field">
-          <div class="ui selection dropdown">
-            <input type="hidden" name="type">
-            <i class="dropdown icon"></i>
-            <div class="default text">Types</div>
-            <div class="menu">
-              <div class="item" data-value="1">偷了谁的奶酪</div>
-              <div class="item" data-value="1">心灵鸡汤</div>
-            </div>
-          </div>
-        </div>
-        <div class="field">
-          <div class="ui checkbox">
-            <input type="checkbox" id="recommend" name="recommend" placeholder="">
-            <label for="recommend">Recommend</label>
-          </div>
-        </div>
-        <div class="field">
-          <button class="ui mini teal basic button"><i class="search icon"></i>Search</button>
-        </div>
-      </div>
-    </form>
+    <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+      <i class="close icon"></i>
+      <div class="header">Reminder：</div>
+      <p th:text="${message}">Operation success！</p>
+    </div>
     <table class="ui celled table">
       <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Type</th>
-          <th>Recommend</th>
-          <th>Update Time</th>
-          <th>Operation</th>
-        </tr>
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Operation</th>
+      </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Java Java Java</td>
-          <td>Java Dev</td>
-          <td>Yes</td>
-          <td>2020-04-01 04:20</td>
-          <td>
-            <a href="#" class="ui mini basic teal button">Edit</a>
-            <a href="#" class="ui mini basic red button">Delete</a>
-          </td>
-        </tr>
+      <tr th:each="type,iterStat : ${page.content}">
+        <td th:text="${iterStat.count}">1</td>
+        <td th:text="${type.name}">Java Java Java</td>
+        <td>
+          <a href="#" th:href="@{/admin/types/{id}/input(id=${type.id})}" class="ui mini teal basic button">Edit</a>
+          <a href="#" th:href="@{/admin/types/{id}/delete(id=${type.id})}" class="ui mini red basic button">Delete</a>
+        </td>
+      </tr>
       </tbody>
       <tfoot>
-        <tr>
-          <th colspan="6">
-            <div class="ui pagination menu">
-              <a href="#" class="mini item">Prev Page</a>
-              <a href="#" class="mini item">Next Page</a>
-            </div>
-            <a href="#" class="ui mini right floated teal basic button"> New </a>
-          </th>
-        </tr>
+      <tr>
+        <th colspan="6">
+          <div class="ui pagination menu" th:if="${page.totalPages}>1">
+            <a th:href="@{/admin/types(page=${page.number}-1)}" class="mini item" th:unless="${page.first}">Prev Page</a>
+            <a th:href="@{/admin/types(page=${page.number}+1)}" class="mini item" th:unless="${page.last}">Next Page</a>
+
+          </div>
+          <a href="#" th:href="@{/admin/types/input}" class="ui mini right floated teal basic button"> New </a>
+        </th>
+      </tr>
       </tfoot>
     </table>
   </div>
 </div>
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -172,17 +151,24 @@
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <!--/*/</th:block>/*/-->
 <script>
-    $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-    });
+  $('.menu.toggle').click(function () {
+    $('.m-item').toggleClass('m-mobile-hide');
+  });
 
-    $('#payButton').popup({
-        popup : $('.payQR.popup'),
-        on : 'click',
-        position: 'bottom center'
-    });
+  $('#payButton').popup({
+    popup : $('.payQR.popup'),
+    on : 'click',
+    position: 'bottom center'
+  });
 
-    $('.ui.dropdown').dropdown();
+  $('.ui.dropdown').dropdown();
+
+  $('.message .close')
+    .on('click', function () {
+      $(this)
+              .closest('.message')
+              .transition('fade');
+    });
 </script>
 </body>
 </html>
