@@ -4,6 +4,7 @@ import com.example.NotFoundException;
 import com.example.dao.BlogRepository;
 import com.example.po.Blog;
 import com.example.po.Type;
+import com.example.utils.MyBeanUtils;
 import com.example.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,12 +71,13 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Blog updateBlog(Long id, Blog blog) {
-        Blog temp = blogRepository.findById(id).orElse(null);
-        if (temp == null) {
+        Blog b = blogRepository.findById(id).orElse(null);
+        if (b == null) {
             throw new NotFoundException("Cannot find Blog");
         }
-        BeanUtils.copyProperties(blog, temp);
-        return blogRepository.save(temp);
+        BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
+        b.setUpdateTime(new Date());
+        return blogRepository.save(b);
     }
 
     @Transactional
