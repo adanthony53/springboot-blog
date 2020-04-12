@@ -1,6 +1,5 @@
 package com.example.web;
 
-import com.example.NotFoundException;
 import com.example.service.BlogService;
 import com.example.service.TagService;
 import com.example.service.TypeService;
@@ -38,7 +37,8 @@ public class IndexController {
     }
 
     @GetMapping("/blog/{id}")
-    public String blog(@PathVariable("id") Long id) {
+    public String blog(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("blog", blogService.getAndConvert(id));
         return "blog";
     }
 
