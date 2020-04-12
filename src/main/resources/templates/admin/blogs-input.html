@@ -48,12 +48,13 @@
 <!--    Middle Content    -->
 <div class="m-container m-padded-tb-big">
   <div class="ui container">
-    <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
-      <input type="hidden" name="publish">
+    <form id="blog-form" action="#" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form">
+      <input type="hidden" name="publish" th:value="*{publish}">
+      <input type="hidden" name="id" th:value="*{id}">
       <div class="required field">
         <div class="ui left labeled input">
           <div class="ui selection compact teal basic dropdown label">
-            <input type="hidden" value="Original">
+            <input type="hidden" value="Original" name="flag" th:value="*{flag}">
             <i class="dropdown icon"></i>
             <div class="default text">Original</div>
             <div class="menu">
@@ -62,13 +63,13 @@
               <div class="item" date-value="Translation">Translation</div>
             </div>
           </div>
-          <input type="text" name="title" placeholder="Title">
+          <input type="text" name="title" placeholder="Title" th:value="*{title}">
         </div>
       </div>
 
       <div class="required field">
         <div id="md-content" style="z-index: 1 !important;">
-          <textarea name="content" placeholder="Blog content" style="display: none"></textarea>
+          <textarea name="content" placeholder="Blog content" style="display: none" th:text="*{content}"></textarea>
         </div>
       </div>
 
@@ -77,7 +78,7 @@
           <div class="ui left labeled input">
             <label class="ui compact teal basic label">Types</label>
             <div class="ui fluid selection dropdown">
-              <input type="hidden" name="type.id">
+              <input type="hidden" name="type.id" th:value="*{type}!=null ? *{type.id}">
               <i class="dropdown icon"></i>
               <div class="default text">Types</div>
               <div class="menu">
@@ -90,7 +91,7 @@
           <div class="ui left labeled input">
             <label class="ui compact teal basic label">Tags</label>
             <div class="ui fluid multiple search selection dropdown">
-              <input type="hidden" name="tagIds">
+              <input type="hidden" name="tagIds" th:value="*{tagIds}">
               <i class="dropdown icon"></i>
               <div class="default text">Tags</div>
               <div class="menu">
@@ -104,7 +105,7 @@
       <div class="required field">
         <div class="ui left labeled input">
           <label class="ui teal basic label">Head Image</label>
-          <input type="text" name="firstPicture" placeholder="Image Address">
+          <input type="text" name="firstPicture" placeholder="Image Address" th:value="*{firstPicture}">
         </div>
       </div>
 
@@ -112,25 +113,25 @@
       <div class="inline fields">
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="recommend" name="recommend" checked class="hidden">
+            <input type="checkbox" id="recommend" name="recommend" checked th:checked="*{recommend}" class="hidden" >
             <label for="recommend">Recommend</label>
           </div>
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+            <input type="checkbox" id="shareStatement" name="shareStatement" th:checked="*{shareStatement}" class="hidden">
             <label for="shareStatement">Allow sharing</label>
           </div>
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="donate" name="donate" class="hidden">
+            <input type="checkbox" id="donate" name="donate" th:checked="*{donate}" class="hidden">
             <label for="donate">Allow donation</label>
           </div>
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="commentAllow" name="commentAllow" class="hidden">
+            <input type="checkbox" id="commentAllow" name="commentAllow" th:checked="*{commentAllow}" class="hidden">
             <label for="commentAllow">Allow comments</label>
           </div>
         </div>

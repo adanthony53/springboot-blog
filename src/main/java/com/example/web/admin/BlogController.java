@@ -42,8 +42,6 @@ public class BlogController {
     @GetMapping("/blogs")
     public String list(@PageableDefault(size=5, sort = {"id"}, direction = Sort.Direction.ASC)
                                    Pageable pageable, BlogQuery blog, Model model) {
-
-        Page<Type> temp = typeService.listType(pageable);
         model.addAttribute("types", typeService.listType());
         model.addAttribute("page", blogService.listBlog(pageable, blog));
         return LIST;
@@ -63,10 +61,12 @@ public class BlogController {
         return INPUT;
     }
 
-    @PostMapping("/blogs/{id}/input")
+    @GetMapping("/blogs/{id}/input")
     public String editInput(@PathVariable("id") Long id, Model model) {
         setTypeAndTag(model);
-        model.addAttribute("blog", blogService.getBlog(id));
+        Blog blog = blogService.getBlog(id);
+        blog.init();
+        model.addAttribute("blog", blog);
         return INPUT;
     }
 
