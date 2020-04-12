@@ -22,4 +22,6 @@ public interface TagService {
     Tag updateTag(Long id, Tag tag);
 
     void deleteTag(Long id);
+
+    List<Tag> listTagTop(Integer size);
 }
