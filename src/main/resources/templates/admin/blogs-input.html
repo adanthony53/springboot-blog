@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="admin/_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Input</title>
+  <title>New Blog</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
-  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
-  <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.scc}" >
-
+  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{lib/editormd/css/editormd.min.css}">
+  <link rel="stylesheet" href="../../static/css/me.css">
 </head>
+
 <body>
-<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
       <h2 class="ui teal header item">Blog Management</h2>
-      <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>Blog</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>Blog</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>Types</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
       <div class="right m-item m-mobile-hide menu">
@@ -39,16 +39,17 @@
 <div class="ui attached pointing menu">
   <div class="ui container">
     <div class="right menu">
-      <a href="#" class="teal active item">Publish</a>
-      <a href="#" class="item">List</a>
+      <a href="#" th:href="@{/admin/blogs/input}" class="item">Publish</a>
+      <a href="#" th:href="@{/admin/blogs}" class="teal active item">List</a>
     </div>
   </div>
 </div>
 
 <!--    Middle Content    -->
-<div class="m-container-small m-padded-tb-big">
+<div class="m-container m-padded-tb-big">
   <div class="ui container">
-    <form action="#" method="post" class="ui form">
+    <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
+      <input type="hidden" name="publish">
       <div class="required field">
         <div class="ui left labeled input">
           <div class="ui selection compact teal basic dropdown label">
@@ -67,18 +68,7 @@
 
       <div class="required field">
         <div id="md-content" style="z-index: 1 !important;">
-          <textarea name="content" placeholder="Blog content" style="display: none">
-          [TOC]
-
-#### Options ss
-- Tex (based on katex);
-- Emoji;
-- list;
-- html tags decddd;
-- Diagram;
-
-笑嘻了笑嘻了
-        </textarea>
+          <textarea name="content" placeholder="Blog content" style="display: none"></textarea>
         </div>
       </div>
 
@@ -87,12 +77,11 @@
           <div class="ui left labeled input">
             <label class="ui compact teal basic label">Types</label>
             <div class="ui fluid selection dropdown">
-              <input type="hidden" name="hidden">
+              <input type="hidden" name="type.id">
               <i class="dropdown icon"></i>
               <div class="default text">Types</div>
               <div class="menu">
-                <div class="item" data-value="1">Java Dev</div>
-                <div class="item" data-value="2">Python Dev</div>
+                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">Big Data</div>
               </div>
             </div>
           </div>
@@ -101,12 +90,11 @@
           <div class="ui left labeled input">
             <label class="ui compact teal basic label">Tags</label>
             <div class="ui fluid multiple search selection dropdown">
-              <input type="hidden" name="tag">
+              <input type="hidden" name="tagIds">
               <i class="dropdown icon"></i>
               <div class="default text">Tags</div>
               <div class="menu">
-                <div class="item" data-value="1">Java</div>
-                <div class="item" data-value="2">Python</div>
+                <div th:each="tag : ${tags}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}">Fun</div>
               </div>
             </div>
           </div>
@@ -116,9 +104,10 @@
       <div class="required field">
         <div class="ui left labeled input">
           <label class="ui teal basic label">Head Image</label>
-          <input type="text" name="indexPicture" placeholder="Image Address">
+          <input type="text" name="firstPicture" placeholder="Image Address">
         </div>
       </div>
+
 
       <div class="inline fields">
         <div class="field">
@@ -129,20 +118,20 @@
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="repost" name="repost" class="hidden">
-            <label for="repost">Allow Repost</label>
+            <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+            <label for="shareStatement">Allow sharing</label>
           </div>
         </div>
         <div class="field">
           <div class="ui checkbox">
             <input type="checkbox" id="donate" name="donate" class="hidden">
-            <label for="donate">Allow Donation</label>
+            <label for="donate">Allow donation</label>
           </div>
         </div>
         <div class="field">
           <div class="ui checkbox">
-            <input type="checkbox" id="comment" name="comment" class="hidden">
-            <label for="comment">Allow comments</label>
+            <input type="checkbox" id="commentAllow" name="commentAllow" class="hidden">
+            <label for="commentAllow">Allow comments</label>
           </div>
         </div>
       </div>
@@ -151,8 +140,8 @@
 
       <div class="ui right aligned container">
         <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
-        <button class="ui secondary button">Save</button>
-        <button class="ui teal button">Submit</button>
+        <button type="button" id="save-btn" class="ui secondary button">Save</button>
+        <button type="button" id="publish-btn" class="ui teal button">Submit</button>
       </div>
     </form>
   </div>
@@ -174,7 +163,7 @@
 
 
 <!--   footer  -->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
   <div class="ui center aligned container">
     <div class="ui inverted divided stackable grid">
       <div class="three wide column">
@@ -211,9 +200,13 @@
     <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © </p>
   </div>
 </footer>
+
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
 <script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/</th:block>/*/-->
+
 
 <script>
 
@@ -224,8 +217,7 @@
             width   : "100%",
             height  : 640,
             syncScrolling : "single",
-//        path    : "../static/lib/editormd/lib/"
-            path    : "../../static/lib/editormd/lib/"
+            path    : "/lib/editormd/lib/"
         });
     });
 
@@ -242,13 +234,12 @@
     $('.ui.dropdown').dropdown();
 
     $('#save-btn').click(function () {
-        $('[name="published"]').val(false);
+        $('[name="publish"]').val(false);
         $('#blog-form').submit();
     });
 
-
     $('#publish-btn').click(function () {
-        $('[name="published"]').val(true);
+        $('[name="publish"]').val(true);
         $('#blog-form').submit();
     });
 
@@ -280,13 +271,6 @@
                 rules: [{
                     type : 'empty',
                     prompt: 'Please enter the head image link'
-                }]
-            },
-            description : {
-                identifier: 'description',
-                rules: [{
-                    type : 'empty',
-                    prompt: 'Please enter description'
                 }]
             }
         }

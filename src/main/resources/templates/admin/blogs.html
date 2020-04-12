@@ -61,7 +61,6 @@
               <div class="default text">Types</div>
               <div class="menu">
                 <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">Big Data</div>
-
               </div>
             </div>
             <button id="clear-btn" class="ui compact button">clear</button>
@@ -89,16 +88,17 @@
           <th>Type</th>
           <th>Recommend</th>
           <th>Status</th>
-          <th>Operation</th>
+          <th>Last Modified</th>
+          <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="blog, iterStat : ${page.content}">
+        <tr th:each="blog,iterStat : ${page.content}">
           <td th:text="${iterStat.count}">1</td>
           <td th:text="${blog.title}">猎马人</td>
           <td th:text="${blog.type.name}">炉石传说</td>
           <td th:text="${blog.recommend} ? 'Yes':'No'">Yes</td>
-          <td th:text="${blog.published} ? 'Published':'Draft'">Draft</td>
+          <td th:text="${blog.publish} ? 'Published':'Draft'">Draft</td>
           <td th:text="${blog.updateTime}">2019-10-02 09:45</td>
           <td>
             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">Edit</a>
@@ -118,6 +118,12 @@
         </tr>
         </tfoot>
       </table>
+
+      <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+        <i class="close icon"></i>
+        <div class="header">Reminder：</div>
+        <p th:text="${message}">Congrats, action succeed!</p>
+      </div>
     </div>
   </div>
 </div>
@@ -191,7 +197,21 @@
         position: 'bottom center'
     });
 
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
     $('.ui.dropdown').dropdown();
+
+    $('#clear-btn')
+        .on('click', function() {
+            $('.ui.type.dropdown')
+                .dropdown('clear')
+            ;
+        });
 
     function page(obj) {
       $("[name='page']").val($(obj).data("page"));
@@ -199,6 +219,7 @@
     }
 
     $("#search-btn").click(function () {
+      $("[name='page']").val(0);
       loaddata();
     });
 

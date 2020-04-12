@@ -17,6 +17,9 @@ public class Blog {
     private Long id;
 
     private String title;
+
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
     private String content;
     private String firstPicture;
     private String flag;
@@ -24,7 +27,7 @@ public class Blog {
     private boolean donate;
     private boolean shareStatement;
     private boolean commentAllow;
-    private boolean publish;
+    private boolean publish; // 1 = published, 0 = draft
     private boolean recommend;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -44,4 +47,7 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
+
+    @Transient
+    private String tagIds;
 }
