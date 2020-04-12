@@ -29,6 +29,7 @@ public class Blog {
     private boolean commentAllow;
     private boolean publish; // 1 = published, 0 = draft
     private boolean recommend;
+    private String description;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
