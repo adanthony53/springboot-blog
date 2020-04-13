@@ -30,7 +30,7 @@ public class TagShowController {
         if (id == -1) { id = tags.get(0).getId(); }
 
         model.addAttribute("tags", tags);
-        model.addAttribute("page", blogService.listBlog(pageable));
+        model.addAttribute("page", blogService.listBlog(pageable, id));
         model.addAttribute("activeTag", id);
         return "tags";
     }
