@@ -473,12 +473,14 @@ h5,h6{font-size:1em;}
             </div>
         </div>
 
+
         <div  class="ui bottom attached segment" th:if="${blog.commentAllow}">
-            <!-- TODO: 留言区域列表-->
+            <!--留言区域列表-->
             <div id="comment-container"  class="ui teal segment">
                 <div th:fragment="commentList">
                     <div class="ui threaded comments" style="max-width: 100%;">
                         <h3 class="ui dividing header">Comment</h3>
+
                         <div class="comment" th:each="comment : ${comments}">
                             <a class="avatar">
                                 <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
@@ -495,7 +497,7 @@ h5,h6{font-size:1em;}
                                     How artistic!
                                 </div>
                                 <div class="actions">
-                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}" onclick="reply(this)">Reply</a>
+                                    <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}" onclick="reply(this)">回复</a>
                                 </div>
                             </div>
                             <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
@@ -505,9 +507,9 @@ h5,h6{font-size:1em;}
                                     </a>
                                     <div class="content">
                                         <a class="author" >
-                                            <span th:text="${reply.nickname}">Ryan</span>
+                                            <span th:text="${reply.nickname}">小红</span>
                                             <div class="ui mini basic teal left pointing label m-padded-mini" th:if="${reply.adminComment}">Author</div>
-                                            &nbsp;<span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@ John</span>
+                                            <span th:text="|@ ${reply.parentComment.nickname}|" class="m-teal">@ 小白</span>
                                         </a>
                                         <div class="metadata">
                                             <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
@@ -516,67 +518,12 @@ h5,h6{font-size:1em;}
                                             How artistic!
                                         </div>
                                         <div class="actions">
-                                            <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}" onclick="reply(this)">Reply</a>
+                                            <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}" onclick="reply(this)">回复</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--/*-->
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="https://unsplash.it/100/100?image=1005">
-                            </a>
-                            <div class="content">
-                                <a class="author">Elliot Fu</a>
-                                <div class="metadata">
-                                    <span class="date">Yesterday at 12:30AM</span>
-                                </div>
-                                <div class="text">
-                                    <p>This has been very useful for my research. Thanks as well!</p>
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div>
-                            <div class="comments">
-                                <div class="comment">
-                                    <a class="avatar">
-                                        <img src="https://unsplash.it/100/100?image=1005">
-                                    </a>
-                                    <div class="content">
-                                        <a class="author">Jenny Hess</a>
-                                        <div class="metadata">
-                                            <span class="date">Just now</span>
-                                        </div>
-                                        <div class="text">
-                                            Elliot you are always so right :)
-                                        </div>
-                                        <div class="actions">
-                                            <a class="reply">Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment">
-                            <a class="avatar">
-                                <img src="https://unsplash.it/100/100?image=1005">
-                            </a>
-                            <div class="content">
-                                <a class="author">Joe Henderson</a>
-                                <div class="metadata">
-                                    <span class="date">5 days ago</span>
-                                </div>
-                                <div class="text">
-                                    Dude, this is awesome. Thanks so much
-                                </div>
-                                <div class="actions">
-                                    <a class="reply">Reply</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!--*/-->
 
                     </div>
                 </div>
@@ -585,7 +532,7 @@ h5,h6{font-size:1em;}
                 <input type="hidden" name="blog.id" th:value="${blog.id}">
                 <input type="hidden" name="parentComment.id" value="-1">
                 <div class="field">
-                    <textarea name="content" placeholder="Please enter your comment..."></textarea>
+                    <textarea name="content" placeholder="Please enter your comment ..."></textarea>
                 </div>
                 <div class="fields">
                     <div class="field m-mobile-wide m-margin-bottom-small">
@@ -753,7 +700,7 @@ h5,h6{font-size:1em;}
                 identifier: 'content',
                 rules: [{
                     type: 'empty',
-                    prompt: '请输入评论内容'
+                    prompt: 'Please enter your comment'
                 }
                 ]
             },
@@ -761,14 +708,14 @@ h5,h6{font-size:1em;}
                 identifier: 'nickname',
                 rules: [{
                     type: 'empty',
-                    prompt: '请输入你的大名'
+                    prompt: 'Please enter your name'
                 }]
             },
             type: {
                 identifier: 'email',
                 rules: [{
                     type: 'email',
-                    prompt: '请填写正确的邮箱地址'
+                    prompt: 'Please enter your email address'
                 }]
             }
         }
@@ -783,10 +730,10 @@ h5,h6{font-size:1em;}
     $('#commentpost-btn').click(function () {
         var boo = $('.ui.form').form('validate form');
         if (boo) {
-            console.log('校验成功');
+            console.log('Comment validation succeed');
             postData();
         } else {
-            console.log('校验失败');
+            console.log('Comment validation failed');
         }
 
     });
@@ -807,7 +754,7 @@ h5,h6{font-size:1em;}
     function clearContent() {
         $("[name='content']").val('');
         $("[name='parentComment.id']").val(-1);
-        $("[name='content']").attr("placeholder", "请输入评论信息...");
+        $("[name='content']").attr("placeholder", "Please enter your comment...");
     }
 
 

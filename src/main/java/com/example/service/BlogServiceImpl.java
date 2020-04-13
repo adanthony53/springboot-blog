@@ -47,9 +47,11 @@ public class BlogServiceImpl implements BlogService {
         BeanUtils.copyProperties(blog, b);
         String content = b.getContent();
         b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        blogRepository.updateViews(id);
         return b;
     }
 
+    @Transactional
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
