@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+<head th:replace="_fragments :: head(~{::title})">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Me</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css" >
-  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.scc}" >
-
+  <link rel="stylesheet" href="../static/css/me.css">
 </head>
 <body>
-<nav th:replace="_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+<nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
   <div class="ui container">
     <div class="ui inverted secondary stackable menu">
       <h2 class="ui teal header item">Blog</h2>
@@ -17,7 +16,7 @@
       <a href="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>Types</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
       <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>Archive</a>
-      <a href="#" class="active m-item item m-mobile-hide"><i class="mini info icon"></i>About Me</a>
+      <a href="#" class="m-item item m-mobile-hide"><i class="mini info icon"></i>About Me</a>
       <div class="right m-item item m-mobile-hide">
         <div class="ui icon inverted transparent input m-margin-tb-tiny">
           <input type="text" placeholder="Search....">
@@ -37,8 +36,7 @@
     <div class="ui stackable grid">
       <div class="eleven wide column">
         <div class="ui segment">
-<!--          <img src="https://picsum.photos/id/1049/800/600" alt="" class="ui rounded image">-->
-          <img src="../static/images/unname2.png" alt="" class="ui rounded image">
+          <img src="../static/images/unname2.png" th:src="@{/images/unname2.png}" alt="" class="ui rounded image">
         </div>
       </div>
       <div class="five wide column">
@@ -48,7 +46,6 @@
         <div class="ui attached segment">
           <p class="m-text">开会那么严肃的时候，每个人都在被骂每个人都在接受意见的时候，我要笑吗？我是你哥哥，好吧</p>
           <p class="m-text">“说中痛处就气急败坏，其实还是一条懒狗”，哎，好好好好好好好，你觉得是那就是，不狡辩</p>
-<!--          <p class="m-text">我和我的猫都很想你，其实我没有猫，也没有你～～</p>-->
 
         </div>
         <div class="ui attached segment">
@@ -70,8 +67,7 @@
           <a href="#" class="ui circular icon button"><i class="amazon icon"></i></a>
         </div>
         <div class="ui wechat-qr flowing popup transition hidden">
-<!--          <img src="../static/images/wechat.png" alt="" class="ui rounded image" style="width: 100px">-->
-          <img src="../static/images/icon2.png" alt="" class="ui rounded image" style="width: 100px">
+          <img src="../static/images/icon2.png" th:src="@{/images/icon2.png}" alt="" class="ui rounded image" style="width: 100px">
         </div>
       </div>
     </div>
@@ -86,8 +82,9 @@
 <br>
 
 
+
 <!--   footer  -->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
   <div class="ui center aligned container">
     <div class="ui inverted divided stackable grid">
       <div class="three wide column">
@@ -124,9 +121,11 @@
     <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © </p>
   </div>
 </footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-
+<!--/*/</th:block>/*/-->
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
