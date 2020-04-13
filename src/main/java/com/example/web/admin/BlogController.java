@@ -102,5 +102,9 @@ public class BlogController {
         return REDIRECT_LIST;
     }
 
-
+    @GetMapping("/footer/newBlogs")
+    public String newBlogs(Model model) {
+        model.addAttribute("newBlogs", blogService.listRecommendBlogTop(3));
+        return "/admin/_fragments :: newBlogList";
+    }
 }

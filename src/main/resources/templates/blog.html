@@ -431,7 +431,7 @@ h5,h6{font-size:1em;}
 
             <!--标签-->
             <div class="m-padded-lr-responsive">
-                <div class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</div>
+                <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"  class="ui basic teal left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">方法论</a>
             </div>
 
             <!--赞赏-->

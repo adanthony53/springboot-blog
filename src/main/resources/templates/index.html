@@ -75,7 +75,7 @@
                     </div>
                   </div>
                   <div class="right aligned five wide column">
-                    <a href="#" target="_blank" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
+                    <a href="#" th:href="@{/types/{id}(id=${blog.type.id})}" class="ui teal label basic m-padded-tiny m-text-thin" th:text="${blog.type.name}">
                       烈马人
                     </a>
                   </div>
@@ -113,13 +113,13 @@
             <div class="ui two column grid">
               <div class="column"><i class="idea icon"></i>Types</div>
               <div class="right aligned column">
-                <a href="#"  target="_blank">more <i class="angle double right icon"></i></a>
+                <a href="#" th:href="@{/types/-1}" > more <i class="angle double right icon"></i></a>
               </div>
             </div>
           </div>
           <div class="ui teal segment">
             <div class="ui fluid vertical menu" >
-              <a href="#" th:href="@{/type/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
+              <a href="#" th:href="@{/types/{id}(id=${type.id})}" class="item" th:each="type : ${types}">
                 <span th:text="${type.name}">Travel</span>
                 <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">99</div>
               </a>
@@ -133,12 +133,12 @@
             <div class="ui two column grid">
               <div class="column"><i class="tags icon"></i>Tags</div>
               <div class="right aligned column">
-                <a href="#" target="_blank">more <i class="angle double right icon"></i></a>
+                <a href="#" th:href="@{/tags/-1}" > more <i class="angle double right icon"></i></a>
               </div>
             </div>
           </div>
           <div class="ui teal segment" >
-            <a href="#" th:href="@{/tag/{id}(id=${tag.id})}" target="_blank" class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
+            <a href="#" th:href="@{/tags/{id}(id=${tag.id})}"  class="ui teal basic left pointing label m-margin-tb-tiny" th:each="tag : ${tags}">
               <span th:text="${tag.name}">Java</span>
               <div class="detail" th:text="${#arrays.length(tag.blogs)}">99</div>
             </a>
@@ -151,13 +151,13 @@
             <i class="bookmark icon"></i>Recommend
           </div>
           <div class="ui segment" th:each="blog : ${recommendBlogs}">
-            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="m-black m-text-thin" th:text="${blog.title}">User Story</a>
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}"  class="m-black m-text-thin" th:text="${blog.title}">User Story</a>
           </div>
 
         </div>
 
         <!-- QRcode -->
-        <h4 class="ui horizontal divider header"> Check out my website </h4>
+        <h4 class="ui horizontal divider header"> Check out my Github </h4>
         <div class="ui centered card" style="width: 11em">
           <img src="../static/images/icon.png" th:src="@{/images/icon.png}" alt="" class="ui rounded image" >
         </div>
